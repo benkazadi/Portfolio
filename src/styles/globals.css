@@ -1,0 +1,36 @@
+:root {
+	/* Colors */
+	--void-black:#080808;
+	--signal-white:#E8E4D9;
+	--amber-core:#C17A2E;
+	--rust-dim:#5C3317;
+	--static-grey:#2A2A2A;
+	--glitch-teal:#00FFB2;
+
+	/* Fonts */
+	--font-mono: 'Space Mono', monospace;
+	--font-display: 'Cinzel', serif;
+
+	/* Easing */
+	--ease-settle:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: var(--signal-white);
+}
+
+body {
+	background-color: var(--void-black);
+}
+
+main {
+	overflow: hidden;
+}
+
+.star {
+	position: absolute;
+	border-radius: 50%;
+	background-color: var(--signal-white);
+}
