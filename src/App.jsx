@@ -13,10 +13,24 @@ function App() {
 
 			//star config
 			const size = Math.random() * 2 + 0.5;
-			star.style.left = `${Math.floor(Math.random() * 100)}%`;
+			const duration = Math.random() * 25 + 15 + 's';
+			const delay = Math.random() * -20 + 's';
+			const dx = (Math.random() - 0.5) * 12 + 'px';
+			const dy = (Math.random() - 0.5) * 12 + 'px';
+			const opA = 0.08 + Math.random() * 0.15;
+			const opB = 0.25 + Math.random() * 0.35;
+
 			star.style.top = `${Math.floor(Math.random() * 100)}%`;
+			star.style.left = `${Math.floor(Math.random() * 100)}%`;
 			star.style.width = `${size}px`;
 			star.style.height = `${size}px`;
+
+			star.style.setProperty('--starDur', duration);
+			star.style.setProperty('--starDel', delay);
+			star.style.setProperty('--dx', dx);
+			star.style.setProperty('--dy', dy);
+			star.style.setProperty('--opacity-a', opA);
+			star.style.setProperty('--opacity-b', opB);
 
 			starField.appendChild(star);
 		}
@@ -26,7 +40,7 @@ function App() {
 		<main>
 			<div ref={starsContainerRef}></div>
 			<div>
-				<h1>This is my portfolio</h1>
+				<h1>This is my portfolio: SIGNAL/LOST</h1>
 			</div>
 		</main>
 	);

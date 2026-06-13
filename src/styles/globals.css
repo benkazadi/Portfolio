@@ -19,6 +19,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	color: var(--signal-white);
+	font-family: var(--font-display);
 }
 
 body {
@@ -33,4 +34,21 @@ main {
 	position: absolute;
 	border-radius: 50%;
 	background-color: var(--signal-white);
+	animation: starDrift var(--starDur) ease-in-out infinite;
+	animation-delay: var(--starDel);
+}
+
+@keyframes starDrift {
+	0% {
+		transform: translate(0, 0);
+		opacity: var(--opacity-a);
+	}
+  	50% {
+		transform: translate(var(--dx), var(--dy));
+		opacity: var(--opacity-b);
+	}
+	100% {
+		transform: translate(0, 0);
+		opacity: var(--opacity-a);
+	}
 }
