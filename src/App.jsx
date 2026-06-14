@@ -39,9 +39,19 @@ function App() {
 	return (
 		<main>
 			<div ref={starsContainerRef}></div>
-			<div>
+			<div className="core-layer">
+				<div className="core"></div>
+				<div className="rings">
+					<div className="ring">
+						<div className="ring"></div>
+					</div>
+				</div>
+			</div>
+			<div className="sysinfo"></div>
+			<div className="main-info">
 				<h1>This is my portfolio: SIGNAL/LOST</h1>
 			</div>
+			<div className="effects"></div>
 		</main>
 	);
 }
