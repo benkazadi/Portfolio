@@ -47,7 +47,19 @@ function App() {
 					</div>
 				</div>
 			</div>
-			<div className="sysinfo"></div>
+			<div className="sysinfo">
+				<nav>
+					<p className="signal">SIGNAL/LOST</p>
+					<div className="radar">
+						<div className="dot"></div>
+						<div className="sweep"></div>
+					</div>
+				</nav>
+				<nav>
+					<p>GLON: 284.15° | GLAT: -12.44° | DIST: 42,019 LY</p>
+					<p>INTEGRITY: 34%</p>
+				</nav>
+			</div>
 			<div className="main-info">
 				<h1>This is my portfolio: SIGNAL/LOST</h1>
 			</div>

@@ -42,13 +42,13 @@ main {
 
 /*=== LAYER 1 ===*/
 .core-layer {
+	z-index: -4;
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	overflow: hidden;
 }
 .core {
-	z-index: -4;
 	position: relative;
 	top: 40%;
 	left: -2rem;
@@ -62,7 +62,6 @@ main {
 }
 
 .rings {
-	z-index: -4;
 	position: relative;
 	left: 65%;
 	top: -12%;
@@ -75,7 +74,6 @@ main {
 	align-items: center;
 	opacity: 5%;
 }
-
 .ring {
 	width: 75%;
 	height: 75%;
@@ -85,12 +83,94 @@ main {
 	justify-content: center;
 	align-items: center;
 }
-
 .ring .ring {
 	width: 60%;
 	height: 60%;
 	border: 0.8rem solid var(--rust-dim);
 	border-radius: 50%;
+}
+
+/*=== LAYER 2 ===*/
+.sysinfo {
+	z-index: -3;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	opacity: 50%;
+}
+.sysinfo nav {
+	height: 4rem;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+}
+.sysinfo nav p {
+	color: var(--static-grey);
+	font-family: var(--font-mono);
+	font-size: 0.5rem;
+	letter-spacing: 5px;
+}
+.radar {
+	position: relative;
+	width: 3.5rem;
+	height: 3.5rem;
+	border: 2px solid var(--static-grey);
+	border-radius: 50%;
+	opacity: 50%;
+}
+.radar::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 60%;
+	height: 60%;
+	border: 2px solid var(--static-grey);
+	border-radius: 50%;
+}
+.radar::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 25%;
+	height: 25%;
+	border: 2px solid var(--static-grey);
+	border-radius: 50%;
+}
+.radar .dot {
+	z-index: 1;
+	position: absolute;
+	top: 40%;
+	left: 75%;
+	transform: translate(-50%, -50%);
+	width: 6px;
+	height: 6px;
+	background-color: red;
+	opacity: 50%;
+	border-radius: 50%;
+	animation: bleep 2s linear infinite;
+	animation-delay: 1s;
+}
+.radar .sweep {
+	position: absolute;
+	transform-origin: 0% 50%;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 2px;
+	transform: translate(0%, -50%);
+	background-color: var(--rust-dim);
+	animation: sweep 5s linear infinite reverse;
+	z-index: 2;
 }
 
 
@@ -130,5 +210,27 @@ main {
 	}
 	100% {
 		scale: 1.1;
+	}
+}
+
+@keyframes sweep {
+	0% {
+		rotate: 0deg;
+	}
+	100% {
+		rotate: 360deg;
+	}
+}
+
+@keyframes bleep {
+	0% {
+		scale: 1;
+		box-shadow: 0 0 0 0 red;
+	}
+	50% {
+		box-shadow: 0 0 2px 2px red;
+	}
+	100% {
+		box-shadow: 0 0 0 0 red;
 	}
 }
