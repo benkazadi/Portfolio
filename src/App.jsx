@@ -41,26 +41,19 @@ function App() {
 			cursor.style.top = e.clientY + 'px';
 			cursor.style.left = e.clientX + 'px';
 		})
+		document.addEventListener('mousedown', (e) => {
+			const ripple = document.createElement('div');
+			ripple.className = 'ripple';
+			ripple.style.top = e.clientY + 'px';
+			ripple.style.left = e.clientX + 'px';
+			document.body.appendChild(ripple);
+			setTimeout(() => {
+				document.body.removeChild(ripple);
+			}, 1000)
+		})
 	}, [])
 
-	/*
 
-	const hasVisitedThisSession = sessionStorage.getItem("hud_booted_session");
-
-    if (!hasVisitedThisSession) {
-      // 1. Tab opened for the first time: Play animation
-      radarElement.classList.add("run-intro-animation");
-
-      // 2. Set the temporary flag so page refreshes skip it
-      sessionStorage.setItem("hud_booted_session", "true");
-    } else {
-      // 2. Page was refreshed: Force the HUD to be immediately visible
-      radarElement.style.transform = "scale(1)";
-      radarElement.style.opacity = "1";
-    }
-  });
-
-  */
 	return (
 		<main>
 			<div ref={cursorRef} className='cursor'>
