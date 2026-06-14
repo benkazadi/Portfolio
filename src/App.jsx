@@ -2,11 +2,13 @@ import { useEffect, useRef } from 'react';
 import './styles/globals.css';
 
 function App() {
-	//=== Stars ===
+	//=== Stars & Cursor===
 	const starsContainerRef = useRef(null);
+	const cursorRef = useRef(null);
 
 	useEffect(() => {
 		const starField = starsContainerRef.current;
+		const cursor = cursorRef.current;
 		for (let i = 0; i < 80; i++) {
 			const star = document.createElement('div');
 			star.className = 'star';
@@ -34,10 +36,36 @@ function App() {
 
 			starField.appendChild(star);
 		}
+
+		document.addEventListener('mousemove', (e) => {
+			cursor.style.top = e.clientY + 'px';
+			cursor.style.left = e.clientX + 'px';
+		})
 	}, [])
 
+	/*
+
+	const hasVisitedThisSession = sessionStorage.getItem("hud_booted_session");
+
+    if (!hasVisitedThisSession) {
+      // 1. Tab opened for the first time: Play animation
+      radarElement.classList.add("run-intro-animation");
+
+      // 2. Set the temporary flag so page refreshes skip it
+      sessionStorage.setItem("hud_booted_session", "true");
+    } else {
+      // 2. Page was refreshed: Force the HUD to be immediately visible
+      radarElement.style.transform = "scale(1)";
+      radarElement.style.opacity = "1";
+    }
+  });
+
+  */
 	return (
 		<main>
+			<div ref={cursorRef} className='cursor'>
+				<div className="cursor-dot"></div>
+			</div>
 			<div ref={starsContainerRef}></div>
 			<div className="core-layer">
 				<div className="core"></div>
@@ -63,7 +91,7 @@ function App() {
 			<div className="main-info">
 				<h1>This is my portfolio: SIGNAL/LOST</h1>
 			</div>
-			<div className="effects"></div>
+			<div className="vignette"></div>
 		</main>
 	);
 }
