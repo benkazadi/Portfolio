@@ -186,7 +186,7 @@ main {
 	height: 3.5rem;
 	border: 2px solid var(--static-grey);
 	border-radius: 50%;
-	opacity: 50%;
+	opacity: 60%;
 }
 .radar::after {
 	content: "";
@@ -244,6 +244,33 @@ main {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	width: min(30rem, 90%);
+	height: 45%;
+	display: flex;
+	justify-content: start;
+}
+
+.content {
+	width: fit-content;
+	height: 100%;
+	padding: 8px;
+}
+
+.content .label {
+	font-size: 0.7rem;
+	letter-spacing: 4px;
+	color: var(--amber-core);
+	font-family: var(--font-mono);
+	margin-bottom: 1rem;
+}
+.content .name {
+	font-size: 4rem;
+	font-weight: 100;
+	margin-bottom: 1rem;
+}
+.content .details {
+	font-family: var(--font-mono);
+	color: var(--static-grey);
 }
 
 /*=== LAYER 4 ===*/
@@ -344,5 +371,11 @@ main {
 	}
 	100% {
 		box-shadow: 0 0 0 0 red;
+	}
+}
+
+@media (min-width: 1024px) {
+	.main-info {
+		width: 40%;
 	}
 }

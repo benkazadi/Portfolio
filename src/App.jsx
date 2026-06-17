@@ -1,6 +1,17 @@
 import { useEffect, useRef } from 'react';
 import './styles/globals.css';
 
+function Void() {
+	return (
+		<div className='content'>
+			<p className='label'>SIGNAL DETECTED</p>
+			<h1 className='name'>Ben Kazadi</h1>
+			<p className='label'>FRAGMENT RECOVERED: </p>
+			<p className='details'>"I build things because i need them to exist"</p>
+		</div>
+	);
+}
+
 function App() {
 	//=== Stars & Cursor===
 	const starsContainerRef = useRef(null);
@@ -94,7 +105,7 @@ function App() {
 			</div>
 			<div className="sysinfo">
 				<nav>
-					<p className="signal">SIGNAL/LOST</p>
+					<p>SIGNAL/LOST</p>
 					<div className="radar">
 						<div className="dot"></div>
 						<div className="sweep"></div>
@@ -106,7 +117,7 @@ function App() {
 				</nav>
 			</div>
 			<div className="main-info">
-				<h1>This is my portfolio: <span className='amber'>SIGNAL/LOST</span></h1>
+				<Void />
 			</div>
 			<div className="vignette"></div>
 		</main>
