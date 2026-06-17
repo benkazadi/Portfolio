@@ -5,10 +5,15 @@ function App() {
 	//=== Stars & Cursor===
 	const starsContainerRef = useRef(null);
 	const cursorRef = useRef(null);
+	const ringsRef = useRef(null);
+	const coreRef = useRef(null);
 
 	useEffect(() => {
 		const starField = starsContainerRef.current;
 		const cursor = cursorRef.current;
+		const rings = ringsRef.current;
+		const core = coreRef.current;
+
 		for (let i = 0; i < 80; i++) {
 			const star = document.createElement('div');
 			star.className = 'star';
@@ -37,9 +42,28 @@ function App() {
 			starField.appendChild(star);
 		}
 
+		let targetTiltX = 0, targetTiltY = 0;
+		let tiltX = 0, tiltY = 0;
+
+		const lerp = (a, b, t) => a + (b - a) * t;
+		const DEPTH = {stars: 4, rings: 15, core: 10};
+
+		function parralaxEffect() {
+			tiltX = lerp(tiltX, targetTiltX, 0.05);
+			tiltY = lerp(tiltY, targetTiltY, 0.05);
+			starField.style.transform = `translate(${tiltX * DEPTH.stars}px, ${tiltY * DEPTH.stars}px)`;
+			rings.style.transform = `translate(${tiltX * DEPTH.rings}px, ${tiltY * DEPTH.rings}px)`;
+			core.style.transform = `translate(${tiltX * DEPTH.core}px, ${tiltY * DEPTH.core}px)`;
+			requestAnimationFrame(parralaxEffect);
+		} 
+
+		parralaxEffect();
+
 		document.addEventListener('mousemove', (e) => {
 			cursor.style.top = e.clientY + 'px';
 			cursor.style.left = e.clientX + 'px';
+			targetTiltX = (e.clientX / window.innerWidth - 0.5) * 2;
+			targetTiltY = (e.clientY / window.innerHeight - 0.5) * 2;
 		})
 		document.addEventListener('mousedown', (e) => {
 			const ripple = document.createElement('div');
@@ -59,10 +83,10 @@ function App() {
 			<div ref={cursorRef} className='cursor'>
 				<div className="cursor-dot"></div>
 			</div>
-			<div ref={starsContainerRef}></div>
+			<div ref={starsContainerRef} className='starfield'></div>
 			<div className="core-layer">
-				<div className="core"></div>
-				<div className="rings">
+				<div className="core" ref={coreRef}></div>
+				<div className="rings" ref={ringsRef}>
 					<div className="ring">
 						<div className="ring"></div>
 					</div>
@@ -82,7 +106,7 @@ function App() {
 				</nav>
 			</div>
 			<div className="main-info">
-				<h1>This is my portfolio: SIGNAL/LOST</h1>
+				<h1>This is my portfolio: <span className='amber'>SIGNAL/LOST</span></h1>
 			</div>
 			<div className="vignette"></div>
 		</main>

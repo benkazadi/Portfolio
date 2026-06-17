@@ -30,6 +30,7 @@
 body {
 	background-color: var(--void-black);
 	cursor: none;
+	overflow: hidden;
 }
 
 .cursor {
@@ -86,8 +87,16 @@ main {
 }
 
 /*=== LAYER 0 ===*/
-.star {
+.starfield {
 	z-index: -5;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	overflow: hidden;
+}
+.star {
 	position: absolute;
 	border-radius: 50%;
 	background-color: var(--signal-white);
@@ -253,6 +262,10 @@ main {
 		rgba(8,8,8,0.5) 72%,
 		rgba(8,8,8,0.95) 100%
 	);
+}
+
+.amber {
+	color: var(--amber-core);
 }
 
 @keyframes starDrift {
