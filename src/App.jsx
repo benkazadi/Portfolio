@@ -12,6 +12,13 @@ function Void() {
 	);
 }
 
+function Node({ id }) {
+	return(
+		<button className={'node ' + (id == 'home' ? 'selected' : '')}></button>
+	);
+}
+
+
 function App() {
 	//=== Stars & Cursor===
 	const starsContainerRef = useRef(null);
@@ -118,6 +125,15 @@ function App() {
 			</div>
 			<div className="main-info">
 				<Void />
+				<div className="navbar">
+					<div className='back'>
+						<button>←</button>
+					</div>
+					<Node id='home' />
+					<Node id='info' />
+					<Node id='about' />
+					<Node id='projects' />
+				</div>
 			</div>
 			<div className="vignette"></div>
 		</main>
