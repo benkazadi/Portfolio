@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './styles/globals.css';
 
 function Void() {
@@ -11,13 +11,6 @@ function Void() {
 		</div>
 	);
 }
-
-function Node({ id }) {
-	return(
-		<button className={'node ' + (id == 'home' ? 'selected' : '')}></button>
-	);
-}
-
 
 function App() {
 	//=== Stars & Cursor===
@@ -95,6 +88,17 @@ function App() {
 		})
 	}, [])
 
+	const [currentTab, setCurrentTab] = useState('home');
+
+	function Node({ id }) {
+		console.log(currentTab);
+		const selected = id == currentTab ? 'selected' : '';
+		return(
+			<div onClick={() => {setCurrentTab(id)}} className='node-container'>
+				<button className={'node ' + selected}></button>
+			</div>
+		);
+	}
 
 	return (
 		<main>
