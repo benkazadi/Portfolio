@@ -1,7 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import './styles/globals.css';
 
-function Void() {
+
+function Node({ id, currentTab, setCurrentTab, transitionTo }) {
+	const selected = id == currentTab ? 'selected' : '';
+	return(
+		<div onClick={() => {setCurrentTab(id); transitionTo()}} className='node-container'>
+			<button className={'node ' + selected}></button>
+		</div>
+	);
+}
+
+function Origin() {
 	return (
 		<div className='content'>
 			<p className='label'>SIGNAL DETECTED</p>
@@ -11,6 +21,33 @@ function Void() {
 		</div>
 	);
 }
+
+function Info() {
+	return (
+		<div className='content'>
+			<h1>This is the info page</h1>
+		</div>
+	);
+}
+
+function About() {
+	return (
+		<div className='content'>
+			<h1>This is the about page</h1>
+		</div>
+	);
+}
+
+function Projects() {
+	return (
+		<div className='content'>
+			<h1>FREQUENCY MAP</h1>
+			<h2>Skills</h2>
+		</div>
+	);
+}
+
+const VIEWS = {home: Origin, info: Info, about: About, projects: Projects };
 
 function App() {
 	//=== Stars & Cursor===
@@ -86,19 +123,16 @@ function App() {
 				document.body.removeChild(ripple);
 			}, 1000)
 		})
-	}, [])
+	}, []);
+
+	function transitionTo() {
+		//add blur effect
+		//wait 
+		//remove blur effect
+	}
 
 	const [currentTab, setCurrentTab] = useState('home');
-
-	function Node({ id }) {
-		console.log(currentTab);
-		const selected = id == currentTab ? 'selected' : '';
-		return(
-			<div onClick={() => {setCurrentTab(id)}} className='node-container'>
-				<button className={'node ' + selected}></button>
-			</div>
-		);
-	}
+	const ActiveView = VIEWS[currentTab];
 
 	return (
 		<main>
@@ -128,15 +162,17 @@ function App() {
 				</nav>
 			</div>
 			<div className="main-info">
-				<Void />
+				{/* MAIN CONTENT */}
+				<ActiveView />
+
 				<div className="navbar">
 					<div className='back'>
 						<button>←</button>
 					</div>
-					<Node id='home' />
-					<Node id='info' />
-					<Node id='about' />
-					<Node id='projects' />
+					<Node id='home' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
+					<Node id='info' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
+					<Node id='about' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
+					<Node id='projects' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 				</div>
 			</div>
 			<div className="vignette"></div>

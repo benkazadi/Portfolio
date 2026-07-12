@@ -24,7 +24,6 @@
 	box-sizing: border-box;
 	color: var(--signal-white);
 	font-family: var(--font-display);
-	user-select: var(--amber-core);
 }
 
 body {
@@ -242,13 +241,11 @@ main {
 
 /*=== LAYER 3 ===*/
 .main-info {
+	margin: auto auto auto auto;
+	margin-top: min(10rem, 20%);
 	z-index: 1;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	width: min(30rem, 90%);
-	height: 45%;
+	height: fit-content;
 	display: flex;
 	flex-direction: column;
 }
@@ -277,15 +274,15 @@ main {
 }
 
 .navbar {
-	position: relative;
+	z-index: 3;
+	position: absolute;
+	top: calc(100dvh - 7rem);
 	left: 50%;
-	top: calc(100% - 10rem);
 	translate: -50% -50%;
 	width: 15rem;
 	height: 3rem;
 	border: 1px solid var(--static-grey);
 	border-radius: 2rem;
-
 	padding: 1rem;
 	display: flex;
 	justify-content: space-evenly;
