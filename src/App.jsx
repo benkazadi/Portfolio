@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import './styles/globals.css';
+import Origin from './Pages/Origin';
+import Info from './Pages/Info';
+import About from './Pages/About';
+import Skills from './Pages/Skills';
+import Projects from './Pages/Projects';
 
 
 function Node({ id, currentTab, setCurrentTab, transitionTo }) {
@@ -11,43 +16,7 @@ function Node({ id, currentTab, setCurrentTab, transitionTo }) {
 	);
 }
 
-function Origin() {
-	return (
-		<div className='content'>
-			<p className='label'>SIGNAL DETECTED</p>
-			<h1 className='name'>Ben Kazadi</h1>
-			<p className='label'>FRAGMENT RECOVERED: </p>
-			<p className='details'>"I build things because i need them to exist"</p>
-		</div>
-	);
-}
-
-function Info() {
-	return (
-		<div className='content'>
-			<h1>This is the info page</h1>
-		</div>
-	);
-}
-
-function About() {
-	return (
-		<div className='content'>
-			<h1>This is the about page</h1>
-		</div>
-	);
-}
-
-function Projects() {
-	return (
-		<div className='content'>
-			<h1>FREQUENCY MAP</h1>
-			<h2>Skills</h2>
-		</div>
-	);
-}
-
-const VIEWS = {home: Origin, info: Info, about: About, projects: Projects };
+const VIEWS = {home: Origin, info: Info, about: About, skills: Skills, projects: Projects };
 
 function App() {
 	//=== Stars & Cursor===

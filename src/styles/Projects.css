@@ -1,0 +1,109 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.project-body {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /*padding: 3rem 4rem;*/
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.projects-grid {
+    width: 100%;
+    height: 80dvh;
+    padding: 1rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 2rem;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--amber-core) var(--void-black);
+}
+
+.project {
+    width: 18rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: var(--void-black);
+    border: 1px solid var(--static-grey);
+    border-radius: 8px;
+    justify-self: center;
+}
+
+.project header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--static-grey);
+    display: flex;
+    justify-content: space-between;
+}
+.project .id {
+    font-family: var(--font-mono);
+    color: var(--rust-dim);
+    font-size: 0.7rem;
+}
+.project h1 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+.project .status {
+    border: 1px solid var(--rust-dim);
+    padding: 2px 8px;
+    height: fit-content;
+    background: rgba(193, 122, 46, 0.1);
+    color: var(--amber-core);
+}
+
+.project main, .project section, .project footer {
+    border-bottom: 1px solid var(--static-grey);
+    padding: 1rem;
+}
+
+.project main p {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.project section {
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.project section div {
+    text-align: center;
+    border: 1px solid var(--static-grey);
+    padding: 2px 8px;
+    height: fit-content;
+    background: rgba(193, 122, 46, 0.02);
+    color: var(--rust-dim);
+}
+.project footer {
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.project footer div {
+    display: flex;
+    gap: 1rem;
+    color: var(--rust-dim);
+}
+.project footer .dot {
+    background: var(--amber-core);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+}

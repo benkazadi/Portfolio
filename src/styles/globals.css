@@ -6,6 +6,7 @@
 	--rust-dim:#5C3317;
 	--static-grey:#2A2A2A;
 	--glitch-teal:#00FFB2;
+	--text-muted: #888;
 
 	/* Fonts */
 	--font-mono: 'Space Mono', monospace;
@@ -241,36 +242,13 @@ main {
 
 /*=== LAYER 3 ===*/
 .main-info {
-	margin: auto auto auto auto;
-	margin-top: min(10rem, 20%);
 	z-index: 1;
 	width: min(30rem, 90%);
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
-}
-
-.content {
-	width: fit-content;
-	height: 100%;
-	padding: 8px;
-}
-
-.content .label {
-	font-size: 0.7rem;
-	letter-spacing: 4px;
-	color: var(--amber-core);
-	font-family: var(--font-mono);
-	margin-bottom: 1rem;
-}
-.content .name {
-	font-size: 4rem;
-	font-weight: 100;
-	margin-bottom: 1rem;
-}
-.content .details {
-	font-family: var(--font-mono);
-	color: var(--static-grey);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .navbar {
