@@ -1,6 +1,6 @@
 import '../styles/Projects.css'
 
-function Project({ id, stack , title, CStatus, description, tags }) {
+function Project({ id, stack , title, CStatus, description, tags, repo, live }) {
     return(
         <div className='project'>
             <header>
@@ -20,8 +20,12 @@ function Project({ id, stack , title, CStatus, description, tags }) {
             </section>
             <footer>
                 <div>
-                    <div className='github'>github</div>
-                    <div className='live'>live</div>
+                    <div className='github'>
+                        <a href={`${repo}`}>Github</a>
+                    </div>
+                    <div className='live'>
+                        <a href={`${live}`}>Live</a>
+                    </div>
                 </div>
                 <div className='dot'></div>
             </footer>
@@ -32,6 +36,20 @@ export default function Projects() {
     const projects = [
         {
             id: 'EXPEDITION_001',
+            stack: '',
+            title: 'Vertex Forge',
+            status: '● In progress',
+            description: `
+                An indie game development team still in progress.
+                It will be focused on bringing creative and unique
+                stories to life by creating immersive experiences through
+                games.`,
+            tags: ['Game Development', 'C++', 'C#'],
+            repo: 'https://...',
+            live: 'https://vertex-forge-studio.vercel.app'
+        },
+        {
+            id: 'EXPEDITION_002',
             stack: 'NODE.JS',
             title: 'ACE',
             status: '● active',
@@ -45,7 +63,7 @@ export default function Projects() {
             live: null
         },
         {
-            id: 'EXPEDITION_002',
+            id: 'EXPEDITION_003',
             stack: 'HTML+CSS+JS',
             title: 'Periodic Table',
             status: 'active',
@@ -55,7 +73,7 @@ export default function Projects() {
             live: 'https://benkazadi.vercel.app'
         },
         {
-            id: 'EXPEDITION_003',
+            id: 'EXPEDITION_004',
             stack: 'NODE.JS',
             title: 'NotePad',
             status: 'active',
@@ -70,7 +88,7 @@ export default function Projects() {
             <h1>PROJECTS</h1>
             <div className='projects-grid'>
                 {projects.map((n, i) => (
-                    <Project key={i} id={n.id} stack={n.stack} title={n.title} CStatus={n.status} description={n.description} tags={n.tags} />
+                    <Project key={i} id={n.id} stack={n.stack} title={n.title} CStatus={n.status} description={n.description} tags={n.tags} repo={n.repo} live={n.live} />
                 ))}
             </div>
         </div>

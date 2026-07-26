@@ -269,13 +269,15 @@ main {
 .navbar .back {
 	border-right: 1px solid var(--static-grey);
 }
-.navbar .back button {
+.navbar .back {
 	cursor: none;
-	padding: 0.4rem 0.48rem;
+	padding: 0.4rem;
 	background: none;
 	margin-right: 1rem;
 	border: 1px solid var(--rust-dim);
 	border-radius: 50%;
+	display: flex;
+	align-items: center;
 }
 .node-container {
 	display: flex;
@@ -295,24 +297,6 @@ main {
 .navbar .selected {
 	background-color: var(--amber-core);
 	box-shadow: 0 0 10px 1px var(--rust-dim);
-}
-
-/*=== LAYER 4 ===*/
-.vignette {
-	pointer-events: none;
-	z-index: 2;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 100%;
-	height: 100%;
-	background: radial-gradient(
-		ellipse at center,
-		transparent 40%,
-		rgba(8,8,8,0.5) 72%,
-		rgba(8,8,8,0.95) 100%
-	);
 }
 
 .amber {

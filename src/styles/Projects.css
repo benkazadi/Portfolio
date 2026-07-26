@@ -101,6 +101,12 @@
     gap: 1rem;
     color: var(--rust-dim);
 }
+.project footer .github a {
+    color: var(--rust-dim);
+}
+.project footer .live a {
+    color: var(--rust-dim);
+}
 .project footer .dot {
     background: var(--amber-core);
     border-radius: 50%;
