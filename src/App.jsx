@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './styles/globals.css';
 import Origin from './Pages/Origin';
-import Info from './Pages/Info';
+import Contact from './Pages/Contact';
 import About from './Pages/About';
 import Skills from './Pages/Skills';
 import Projects from './Pages/Projects';
@@ -17,7 +17,7 @@ function Node({ id, currentTab, setCurrentTab, transitionTo }) {
 	);
 }
 
-const VIEWS = {home: Origin, info: Info, about: About, skills: Skills, projects: Projects };
+const VIEWS = {home: Origin, about: About, skills: Skills, projects: Projects, contact: Contact };
 
 function App() {
 	//=== Stars & Cursor===
@@ -143,10 +143,10 @@ function App() {
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C17A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-left preview-icon"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
 					</button>
 					<Node id='home' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
-					<Node id='info' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 					<Node id='about' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 					<Node id='skills' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 					<Node id='projects' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
+					<Node id='contact' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 				</div>
 			</div>
 		</main>
