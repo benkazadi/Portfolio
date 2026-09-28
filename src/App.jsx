@@ -7,6 +7,7 @@ import Skills from './Pages/Skills';
 import Projects from './Pages/Projects';
 
 
+// pass the currentTab useState to be used when clicked on the node
 function Node({ id, currentTab, setCurrentTab, transitionTo }) {
 	const selected = id == currentTab ? 'selected' : '';
 	return(
@@ -62,6 +63,9 @@ function App() {
 		let targetTiltX = 0, targetTiltY = 0;
 		let tiltX = 0, tiltY = 0;
 
+		// multiplies the distance between two points by a small number and adds it to point a
+		// This is done many times, the number reduce in each iteration
+		// so it slows down
 		const lerp = (a, b, t) => a + (b - a) * t;
 		const DEPTH = {stars: 4, rings: 15, core: 10};
 
@@ -71,7 +75,7 @@ function App() {
 			starField.style.transform = `translate(${tiltX * DEPTH.stars}px, ${tiltY * DEPTH.stars}px)`;
 			rings.style.transform = `translate(${tiltX * DEPTH.rings}px, ${tiltY * DEPTH.rings}px)`;
 			core.style.transform = `translate(${tiltX * DEPTH.core}px, ${tiltY * DEPTH.core}px)`;
-			requestAnimationFrame(parralaxEffect);
+			requestAnimationFrame(parralaxEffect); // to run every frame
 		} 
 
 		parralaxEffect();
@@ -79,8 +83,8 @@ function App() {
 		document.addEventListener('mousemove', (e) => {
 			cursor.style.top = e.clientY + 'px';
 			cursor.style.left = e.clientX + 'px';
-			targetTiltX = (e.clientX / window.innerWidth - 0.5) * 2;
-			targetTiltY = (e.clientY / window.innerHeight - 0.5) * 2;
+			targetTiltX = (e.clientX / window.innerWidth - 0.5) * 2; // forgot why i did this haha
+			targetTiltY = (e.clientY / window.innerHeight - 0.5) * 2; // i'll keep it cuz i don't understand it yet
 		})
 		document.addEventListener('mousedown', (e) => {
 			const ripple = document.createElement('div');
@@ -136,11 +140,12 @@ function App() {
 
 				<div className="navbar">
 					<button className='back'>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C17A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-left preview-icon"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
 					</button>
 					<Node id='home' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 					<Node id='info' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 					<Node id='about' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
+					<Node id='skills' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 					<Node id='projects' currentTab={currentTab} setCurrentTab={setCurrentTab} transitionTo={transitionTo} />
 				</div>
 			</div>
