@@ -99,9 +99,12 @@ function App() {
 	}, []);
 
 	function transitionTo() {
-		//add blur effect
-		//wait 
-		//remove blur effect
+		const blur = document.createElement("div");
+		blur.className = "blur";
+		document.body.appendChild(blur);
+		setTimeout(() => {
+			document.body.removeChild(blur);
+		}, 1000);
 	}
 
 	const [currentTab, setCurrentTab] = useState('home');
