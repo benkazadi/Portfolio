@@ -258,6 +258,7 @@ main {
 	flex-direction: column;
 	margin-left: auto;
 	margin-right: auto;
+	overflow: visible;
 }
 
 .navbar {
