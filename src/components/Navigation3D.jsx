@@ -14,7 +14,7 @@ const AMBER          = 0xc17a2e;
 const PALE           = 0xe8e4d9;
 const INITIAL_CAMERA = new THREE.Vector3(0, 0, 10);
 const INITIAL_LOOK   = new THREE.Vector3(0, 0, 0);
-const PAN_SPEED      = 0.012;
+const PAN_SPEED      = 0.02;
 const DOLLY_SPEED    = 0.35;
 const DOLLY_MIN_Z    = 2;
 const DOLLY_MAX_Z    = 22;
@@ -108,8 +108,14 @@ export default function Navigation3D({ onEnterSection, onClose }) {
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
 		host.appendChild(renderer.domElement);
 
-		scene.add(new THREE.PointLight(AMBER, 28, 32)).position.set(10, 4, 5);
-		scene.add(new THREE.PointLight(0x5c3317, 18, 24)).position.set(5, -2, -6);
+		const keyLight = new THREE.PointLight(AMBER, 28, 32);
+		keyLight.position.set(10, 4, 5);
+		scene.add(keyLight);
+
+		const fillLight = new THREE.PointLight(0x5c3317, 18, 24);
+		fillLight.position.set(5, -2, -6);
+		scene.add(fillLight);
+
 		scene.add(makeStars());
 
 		const nodeObjects = new Map();
