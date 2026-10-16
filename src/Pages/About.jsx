@@ -2,7 +2,7 @@ import '../styles/about.css'
 
 export default function About() {
     return (
-        <div className='content'>
+        <div className='content about-content'>
             <h1 className='about-head'>ABOUT</h1>
 
             <h3>ENTRY 001:   ["IDENTITY"]</h3>

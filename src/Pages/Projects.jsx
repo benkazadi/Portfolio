@@ -14,18 +14,22 @@ function Project({ id, stack , title, CStatus, description, tags, repo, live }) 
                 <p>{description}</p>
             </main>
             <section>
-                {tags.map((n, i) => (
-                    <div key={i}>{n}</div>
+                {tags.map((tag) => (
+                    <div key={tag}>{tag}</div>
                 ))}
             </section>
             <footer>
                 <div>
-                    <div className='github'>
-                        <a href={`${repo}`}>Github</a>
-                    </div>
-                    <div className='live'>
-                        <a href={`${live}`}>Live</a>
-                    </div>
+                    {repo && repo !== 'https://...' && (
+                        <div className='github'>
+                            <a href={repo} target="_blank" rel="noreferrer">GitHub</a>
+                        </div>
+                    )}
+                    {live && (
+                        <div className='live'>
+                            <a href={live} target="_blank" rel="noreferrer">Live</a>
+                        </div>
+                    )}
                 </div>
                 <div className='dot'></div>
             </footer>
@@ -87,8 +91,8 @@ export default function Projects() {
         <div className='project-body'>
             <h1>PROJECTS</h1>
             <div className='projects-grid'>
-                {projects.map((n, i) => (
-                    <Project key={i} id={n.id} stack={n.stack} title={n.title} CStatus={n.status} description={n.description} tags={n.tags} repo={n.repo} live={n.live} />
+                {projects.map((n) => (
+                    <Project key={n.id} id={n.id} stack={n.stack} title={n.title} CStatus={n.status} description={n.description} tags={n.tags} repo={n.repo} live={n.live} />
                 ))}
             </div>
         </div>

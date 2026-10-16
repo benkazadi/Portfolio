@@ -1,67 +1,69 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+.content.home-content {
+  width: min(100%, 52rem);
+}
+
+.home-content .tags {
+  gap: 0.25rem;
+}
+
+.home-content .tags svg {
+  flex: 0 0 auto;
 }
 
 .content {
-    display: block;
-    margin-top: min(10rem, 20%);
-    margin-left: auto;
-    margin-right: auto;
-	width: fit-content;
-	height: 100%;
-	padding: 1rem;
+	width: min(100%, 52rem);
+	margin: 0 auto;
+	padding: 1rem 0;
 }
 
 .content .label {
-	font-size: 0.7rem;
-	letter-spacing: 4px;
-	color: var(--amber-core);
-	font-family: var(--font-mono);
 	margin-bottom: 1rem;
-}
-.content .name {
-	font-size: 4rem;
-	font-weight: 400;
-	margin-bottom: 2rem;
-}
-.content .details {
-	margin-bottom: 2rem;
-	font-family: var(--font-mono);
-	font-size: 1rem;
-	color: var(--text-muted);
-}
-.content .tags {
 	color: var(--amber-core);
-	font-weight: 400;
-	font-size: 1rem;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	letter-spacing: 0.25em;
+	line-height: 1.7;
 }
+
+.content .name {
+	margin-bottom: 1.5rem;
+	font-size: clamp(2.7rem, 7vw, 5.25rem);
+	font-weight: 400;
+	line-height: 1.1;
+	overflow-wrap: anywhere;
+}
+
+.content .details {
+	max-width: 38rem;
+	margin-bottom: 2rem;
+	color: var(--text-muted);
+	font-family: var(--font-mono);
+	font-size: clamp(0.9rem, 2vw, 1rem);
+	line-height: 1.8;
+}
+
+.content .tags {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	color: var(--amber-core);
+	font-size: 0.95rem;
+}
+
 .content .tags span {
-	margin-right: 1rem;
+	margin-right: 0.5rem;
 	color: var(--static-grey);
 }
 
-.content .chev {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 1rem;
-	opacity: 0.75;
-	animation: scroll 1s ease-out infinite reverse;
-}
+@media (max-width: 480px) {
+  .home-content .tags {
+    justify-content: flex-start;
+    font-size: 0.82rem;
+  }
 
-@keyframes scroll {
-	0% {
-		opacity: 0.5;
-		transform: translateY(0);
-	}
-	100% {
-		transform: translateY(20px);
-		opacity: 0.25;
-	}
+  .home-content .tags span {
+    margin-right: 0.25rem;
+  }
 }
