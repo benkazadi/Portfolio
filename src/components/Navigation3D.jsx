@@ -212,7 +212,7 @@ export default function Navigation3D({ onEnterSection, onClose }) {
 				);
 
 				el.style.display    = visible ? 'block' : 'none';
-				el.style.transform  = `translate(${x}px, ${y}px)`;
+				el.style.transform = `translate(calc(${x}px - 20%), calc(${y}px - 20%))`;
 				el.style.opacity    = visible
 					? String(Math.max(0.35, 1 - Math.max(0, proj.z) * 0.45))
 					: '0';

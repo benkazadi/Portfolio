@@ -53,6 +53,22 @@ export default function App() {
 					{/* Main section content */}
 					<div className="section-body">
 						<ActivePage />
+						
+						{/* Next section button */}
+						{(() => {
+						const SECTION_IDS = ['home', 'about', 'skills', 'projects', 'contact'];
+						const currentIndex = SECTION_IDS.indexOf(activeId);
+						const nextId = SECTION_IDS[currentIndex + 1];
+						const nextSection = SECTIONS.find(s => s.id === nextId);
+						if (!nextSection) return null;
+						return (
+							<button className="next-section-button" onClick={() => setActiveId(nextId)}>
+								<span className="next-section-label">{nextSection.label}</span>
+								<span className="next-section-sub">{nextSection.subtitle}</span>
+								<span className="next-section-arrow">↓</span>
+							</button>
+						);
+						})()}
 					</div>
 				</div>
 			)}
@@ -63,9 +79,7 @@ export default function App() {
 					onClick={handleOpenMap}
 					aria-label="Open navigation map"
 				>
-					{/* Simple compass/target icon built from CSS in globals */}
-					<span className="nav-open-icon" aria-hidden="true">◎</span>
-					<span className="nav-open-label">MAP</span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C17A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-locate-fixed preview-icon"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg>
 				</button>
 			)}
 
