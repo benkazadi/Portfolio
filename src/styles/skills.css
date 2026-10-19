@@ -1,0 +1,14 @@
+.skills-content {
+    position: absolute;
+    top: 0;
+    top: 0;
+    width: 100%;
+}
+
+.skills-content h1 {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}

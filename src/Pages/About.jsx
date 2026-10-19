@@ -2,7 +2,7 @@ import '../styles/about.css'
 
 export default function About() {
     return (
-        <div className='content about-content'>
+        <div className='about-content'>
             <h1 className='about-head'>ABOUT</h1>
 
             <h3>ENTRY 001:   ["IDENTITY"]</h3>
@@ -10,11 +10,18 @@ export default function About() {
 
             <h3>ENTRY 002:   ["ORIGIN"]</h3>
             <p>"I always loved creating, the thought of conjuring something that has value out of thin air always amazed me"</p>
-            <br />
             <p>"And it is this love for creation that got me into programming, writing, drawing and playing piano"</p>
 
-            <h3>ENTRY 003: [REDACTED... CLEARANCE PENDING]</h3>
-            <h3>ENTRY 004: [REDACTED... CLEARANCE PENDING]</h3>
+            <h3>ENTRY 003: ["Philosophy"]</h3>
+            <p className='philosophy'>
+                <span>I want to make this thing </span>→
+                <span>How does this actually work? </span>→
+                <span>building it</span>→
+                <span>breaking it</span>→
+                <span>rebuilding it</span>
+            </p>
+            <h3>ENTRY 004: [FREQUENCIES... CLEARANCE PENDING]</h3>
+            <h3>ENTRY 004: [LEARNING... CLEARANCE PENDING]</h3>
         </div>
     );
 }

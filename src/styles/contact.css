@@ -1,0 +1,21 @@
+.contact-content {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 1.5rem 10rem 0 10rem;
+}
+
+.contact-content h1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    margin-top: 0;
+}
+
+.screen {
+    border: 2px solid var(--amber-core);
+    width: 100%;
+    height: 100%;
+}

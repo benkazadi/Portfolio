@@ -77,6 +77,22 @@ a {
 	color: var(--amber-core);
 }
 
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 2px var(--amber-core),
+      0 0 5px var(--amber-core),
+      0 0 10px var(--amber-core),
+      0 0 18px var(--amber-core);
+  }
+
+  20%, 24%, 55% {
+    opacity: 0.2;
+    text-shadow: none;
+  }
+}
+
 @media (max-width: 600px) {
   .main-info {
     padding: 5rem 1.25rem 4rem;

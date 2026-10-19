@@ -1,8 +1,10 @@
+import '../styles/skills.css'
+
 export default function Skills() {
     return (
-        <div className='content'>
+        <div className='skills-content'>
             <h1>FREQUENCY MAP</h1>
-            <p><i>Coming soon too</i></p>
+            <p><i>Coming soon</i></p>
         </div>
     );
 }

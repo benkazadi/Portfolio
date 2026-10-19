@@ -1,8 +1,13 @@
+import '../styles/contact.css'
+
 export default function Contact() {
     return (
-        <div className='content'>
-            <h1>Contact</h1>
-            <p><i>Soon, very soon...</i></p>
+        <div className='contact-content'>
+            <h1>CONTACT</h1>
+            <div className='screen'>
+                <div className="info"></div>
+                <div className="message"></div>
+            </div>
         </div>
     );
 }

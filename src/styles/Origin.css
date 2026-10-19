@@ -18,15 +18,22 @@
 
 .content .label {
 	margin-bottom: 1rem;
-	color: var(--amber-core);
 	font-family: var(--font-mono);
 	font-size: 0.7rem;
 	letter-spacing: 0.25em;
 	line-height: 1.7;
+	animation: flicker 4s infinite;
+	  color: var(--amber-core);
+	text-shadow:
+		0 0 2px var(--amber-core),
+		0 0 5px var(--amber-core),
+		0 0 10px var(--amber-core),
+		0 0 18px var(--amber-core);
 }
 
 .content .name {
-	margin-bottom: 1.5rem;
+	margin-bottom: 3rem;
+	margin-top: 2rem;
 	font-size: clamp(2.7rem, 7vw, 5.25rem);
 	font-weight: 400;
 	line-height: 1.1;
