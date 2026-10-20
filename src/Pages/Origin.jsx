@@ -1,6 +1,7 @@
 import '../styles/Origin.css';
+import NextSection from '../components/NextSection.jsx';
 
-export default function Origin() {
+export default function Origin({ onNext }) {
 	return (
 		<div className='content home-content'>
 			<p className='label'>[ SIGNAL DETECTED ]</p>
@@ -15,6 +16,7 @@ export default function Origin() {
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 16" fill="none" stroke="#C17A2E" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings preview-icon"><circle cx="12" cy="12" r="3"/></svg>
 				<span>Experiments</span>
 			</p>
+			<NextSection label="ABOUT" subtitle="IDENTITY ARCHIVE" onClick={onNext} />
 		</div>
 	);
 }

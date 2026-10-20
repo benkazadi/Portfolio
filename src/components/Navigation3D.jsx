@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import '../styles/spatial.css';
 
 const SECTIONS = [
-	{ id: 'home',     label: 'HOME',     subtitle: 'SIGNAL DETECTED',   position: [0, 0, 0]    },
+	{ id: 'origin',   label: 'ORIGIN',   subtitle: 'SIGNAL DETECTED',   position: [0, 0, 0]    },
 	{ id: 'about',    label: 'ABOUT',    subtitle: 'IDENTITY ARCHIVE',  position: [-10, 4, -10] },
 	{ id: 'skills',   label: 'SKILLS',   subtitle: 'FREQUENCY MAP',     position: [3, 10, -20]  },
 	{ id: 'projects', label: 'PROJECTS', subtitle: 'FIELD EXPEDITIONS', position: [12, 8, -30]  },

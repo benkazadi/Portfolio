@@ -1,4 +1,5 @@
 import '../styles/Projects.css'
+import NextSection from '../components/NextSection';
 
 function Project({ id, stack , title, CStatus, description, tags, repo, live }) {
     return(
@@ -36,7 +37,7 @@ function Project({ id, stack , title, CStatus, description, tags, repo, live }) 
         </div>
     )
 }
-export default function Projects() {
+export default function Projects( { onNext } ) {
     const projects = [
         {
             id: 'EXPEDITION_001',
@@ -95,6 +96,7 @@ export default function Projects() {
                     <Project key={n.id} id={n.id} stack={n.stack} title={n.title} CStatus={n.status} description={n.description} tags={n.tags} repo={n.repo} live={n.live} />
                 ))}
             </div>
+            <NextSection label="CONTACT" subtitle="CONTACT ME" onClick={onNext} />
         </div>
     );
 }

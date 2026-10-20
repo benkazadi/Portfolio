@@ -8,7 +8,7 @@ import Projects from './Pages/Projects';
 import Contact  from './Pages/Contact';
 
 const SECTIONS = [
-	{ id: 'home',     label: 'HOME',     subtitle: 'SIGNAL DETECTED',   Component: Origin   },
+	{ id: 'origin',   label: 'ORIGIN',   subtitle: 'SIGNAL DETECTED',   Component: Origin   },
 	{ id: 'about',    label: 'ABOUT',    subtitle: 'IDENTITY ARCHIVE',  Component: About    },
 	{ id: 'skills',   label: 'SKILLS',   subtitle: 'FREQUENCY MAP',     Component: Skills   },
 	{ id: 'projects', label: 'PROJECTS', subtitle: 'FIELD EXPEDITIONS', Component: Projects },
@@ -33,6 +33,9 @@ export default function App() {
 
 	const inSection = activeId !== null;
 
+	const currentIndex = SECTIONS.findIndex(s => s.id === activeId);
+	const nextMeta     = SECTIONS[currentIndex + 1];
+
 	return (
 		<div className="app">
 			<header className="spatial-telemetry" aria-hidden="true">
@@ -52,23 +55,7 @@ export default function App() {
 
 					{/* Main section content */}
 					<div className="section-body">
-						<ActivePage />
-						
-						{/* Next section button */}
-						{(() => {
-						const SECTION_IDS = ['home', 'about', 'skills', 'projects', 'contact'];
-						const currentIndex = SECTION_IDS.indexOf(activeId);
-						const nextId = SECTION_IDS[currentIndex + 1];
-						const nextSection = SECTIONS.find(s => s.id === nextId);
-						if (!nextSection) return null;
-						return (
-							<button className="next-section-button" onClick={() => setActiveId(nextId)}>
-								<span className="next-section-label">{nextSection.label}</span>
-								<span className="next-section-sub">{nextSection.subtitle}</span>
-								<span className="next-section-arrow">↓</span>
-							</button>
-						);
-						})()}
+						<ActivePage onNext={nextMeta ? () => setActiveId(nextMeta.id) : undefined} />
 					</div>
 				</div>
 			)}
@@ -79,7 +66,7 @@ export default function App() {
 					onClick={handleOpenMap}
 					aria-label="Open navigation map"
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C17A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-locate-fixed preview-icon"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C17A2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-locate-fixed preview-icon"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg>
 				</button>
 			)}
 

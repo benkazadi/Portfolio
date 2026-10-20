@@ -1,6 +1,7 @@
 import '../styles/about.css'
+import NextSection from '../components/NextSection';
 
-export default function About() {
+export default function About( { onNext } ) {
     return (
         <div className='about-content'>
             <h1 className='about-head'>ABOUT</h1>
@@ -21,7 +22,8 @@ export default function About() {
                 <span>rebuilding it</span>
             </p>
             <h3>ENTRY 004: [FREQUENCIES... CLEARANCE PENDING]</h3>
-            <h3>ENTRY 004: [LEARNING... CLEARANCE PENDING]</h3>
+            <h3 className='last-entry'>ENTRY 004: [LEARNING... CLEARANCE PENDING]</h3>
+            <NextSection label="SKILLS" subtitle="FREQUENCY MAP" onClick={onNext} />
         </div>
     );
 }

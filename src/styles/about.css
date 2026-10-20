@@ -59,3 +59,7 @@
   font-size: 1.15rem;
   animation: flicker 4s infinite;
 }
+
+.last-entry {
+  margin-bottom: 2.5rem !important;
+}
