@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import './styles/globals.css';
+import './styles/background.css'
 import Navigation3D from './components/Navigation3D';
 import Origin   from './Pages/Origin';
 import About    from './Pages/About';
 import Skills   from './Pages/Skills';
 import Projects from './Pages/Projects';
 import Contact  from './Pages/Contact';
+import Background from './components/background/Background';
 
 const SECTIONS = [
 	{ id: 'origin',   label: 'ORIGIN',   subtitle: 'SIGNAL DETECTED',   Component: Origin   },
@@ -51,7 +53,7 @@ export default function App() {
 			{inSection && ActivePage && (
 				<div className="section-world">
 					{/* Parallax background */}
-					<div className="section-bg" aria-hidden="true" />
+					<Background />
 
 					{/* Main section content */}
 					<div className="section-body">

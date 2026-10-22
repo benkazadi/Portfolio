@@ -124,6 +124,7 @@ const SIGNALS = [
 	{ label: 'Godot / GDScript', level: 0.6, status: 'active' },
 	{ label: 'Full-stack systems', level: 0.6, status: 'advancing' },
 	{ label: 'Networking', level: 0.3, status: 'early signal' },
+	{ label: 'Software Engineering', level: 0.1, status: 'early signal' },
 ];
 
 function AcquiringBody() {

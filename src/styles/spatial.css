@@ -33,13 +33,6 @@
   flex-direction: column;
 }
 
-.section-bg {
-	position: absolute;
-	inset: 0;
-	z-index: 0;
-	/* Background layers go here */
-}
-
 .section-body {
   flex: 1;
 	position: relative;
