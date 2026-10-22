@@ -1,29 +1,61 @@
-import '../styles/about.css'
-import NextSection from '../components/NextSection';
+import { useRef } from 'react';
+import '../styles/About.css';
+import useCardDeck from '../hooks/useCardDeck';
+import DeckCard from '../components/about/DeckCard';
+import { CARDS } from './aboutCards';
 
-export default function About( { onNext } ) {
-    return (
-        <div className='about-content'>
-            <h1 className='about-head'>ABOUT</h1>
+const MAX_VISIBLE_DEPTH = 3;
 
-            <h3>ENTRY 001:   ["IDENTITY"]</h3>
-            <p>Ben Kazadi. Sophomore. Computer Science. Copperbelt University, Kitwe. </p>
+export default function About({ onNext }) {
+	const surfaceRef = useRef(null);
+	const { activeIndex, leavingIndex, phase, goTo, forward, back } = useCardDeck({
+		total: CARDS.length,
+		surfaceRef,
+	});
 
-            <h3>ENTRY 002:   ["ORIGIN"]</h3>
-            <p>"I always loved creating, the thought of conjuring something that has value out of thin air always amazed me"</p>
-            <p>"And it is this love for creation that got me into programming, writing, drawing and playing piano"</p>
+	return (
+		<div className="about-page" ref={surfaceRef}>
+			<div className="about-deck" role="region" aria-roledescription="carousel" aria-label="About Ben Kazadi">
+				{CARDS.map(({ id, numeral, title, Body }, i) => {
+					const offset = i - activeIndex;
 
-            <h3>ENTRY 003: ["Philosophy"]</h3>
-            <p className='philosophy'>
-                <span>I want to make this thing </span>→
-                <span>How does this actually work? </span>→
-                <span>building it</span>→
-                <span>breaking it</span>→
-                <span>rebuilding it</span>
-            </p>
-            <h3>ENTRY 004: [FREQUENCIES... CLEARANCE PENDING]</h3>
-            <h3 className='last-entry'>ENTRY 004: [LEARNING... CLEARANCE PENDING]</h3>
-            <NextSection label="SKILLS" subtitle="FREQUENCY MAP" onClick={onNext} />
-        </div>
-    );
+					let status;
+					if (phase === 'exiting' && i === leavingIndex) status = 'exiting';
+					else if (offset === 0) status = 'active';
+					else if (offset > 0) status = 'behind';
+					else status = 'past';
+
+					const depth = status === 'behind' ? Math.min(offset, MAX_VISIBLE_DEPTH) : 0;
+					const front = status === 'active' || status === 'exiting';
+					const zIndex = front ? 20 : status === 'behind' ? 10 - depth : 0;
+
+					return (
+						<DeckCard
+							key={id}
+							index={i}
+							total={CARDS.length}
+							numeral={numeral}
+							title={title}
+							status={status}
+							entering={status === 'active' && phase === 'entering'}
+							depth={depth}
+							deep={offset > MAX_VISIBLE_DEPTH}
+							zIndex={zIndex}
+							onBack={back}
+							onForward={forward}
+							onJump={goTo}
+							onLeave={onNext}
+							leaveLabel="Skills"
+						>
+							<Body />
+						</DeckCard>
+					);
+				})}
+			</div>
+
+			<p className="about-sr" aria-live="polite">
+				{`Fragment ${activeIndex + 1} of ${CARDS.length}: ${CARDS[activeIndex].title}`}
+			</p>
+		</div>
+	);
 }
