@@ -1,0 +1,41 @@
+.panel {
+	--brass-hi: #e3b06a;
+	--brass-lo: #7d4b1e;
+	--ember: #f0c27c;
+
+	position: relative;
+	isolation: isolate;
+	padding: 1.15rem 1.3rem;
+	border: 1px solid var(--rust-dim);
+	border-radius: 6px;
+	background:
+		radial-gradient(120% 70% at 50% 0%, rgba(193, 122, 46, 0.08), transparent 62%),
+		linear-gradient(165deg, #161310 0%, #0d0b0a 58%, #090808 100%);
+	/* The double brass frame is built from stacked inset shadows. */
+	box-shadow:
+		inset 0 0 0 5px #0a0908,
+		inset 0 0 0 6px rgba(193, 122, 46, 0.24),
+		0 20px 44px rgba(0, 0, 0, 0.6),
+		0 0 38px rgba(193, 122, 46, 0.05);
+}
+
+/* Four rivets: four tiny radial gradients pinned to the corners. */
+.panel::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+	pointer-events: none;
+	--rivet: #f0c27c 0 1px, #9a6125 1px 2.6px, #261407 2.6px 3.7px, transparent 4.2px;
+	background:
+		radial-gradient(circle at 13px 13px, var(--rivet)),
+		radial-gradient(circle at calc(100% - 13px) 13px, var(--rivet)),
+		radial-gradient(circle at 13px calc(100% - 13px), var(--rivet)),
+		radial-gradient(circle at calc(100% - 13px) calc(100% - 13px), var(--rivet));
+}
+
+.panel__rule {
+	height: 1px;
+	margin: 0.85rem 0 0;
+	background: linear-gradient(90deg, transparent, var(--rust-dim) 20%, var(--amber-core) 50%, var(--rust-dim) 80%, transparent);
+}
