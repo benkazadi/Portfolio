@@ -1,52 +1,362 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   BACKGROUND — "THE DRIFT"
+   One lonely brass heart, a torn chain, a black hole, in a very large dark.
+
+   Contents
+     1  Root + knobs          5  Black hole
+     2  Parallax layers       6  Chain + loose links
+     3  Sky: haze + stars     7  Mechanical heart
+     4  Scene placement       8  Debris, dust, near cog, vignette
+                              9  Keyframes · 10 Mobile · 11 Reduced motion
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. ROOT + KNOBS ──────────────────────────────────────────────────────── */
 .section-bg {
+	/* Tints of the existing amber/rust, not new hues. */
+	--brass-hi: #e3b06a;
+	--brass-lo: #7d4b1e;
+	--ember: #f0c27c;
+	--scene-opacity: 0.92; /* KNOB: lower = the whole scene recedes */
+
 	position: absolute;
 	inset: 0;
 	z-index: 0;
+	overflow: hidden;
+	pointer-events: none;
 }
 
-.star-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+/* ── 2. PARALLAX LAYERS ───────────────────────────────────────────────────── */
+/* --px / --py come from useParallax (−1…1). --depth is set inline per layer.
+   The individual `translate` property is used (not `transform`) so it never
+   fights the rotations and scales inside a layer. inset:-3rem makes every
+   layer slightly larger than the screen, so shifting never reveals an edge. */
+.bg-layer {
+	position: absolute;
+	inset: -3rem;
+	translate: calc(var(--px, 0) * var(--depth, 0) * 1px) calc(var(--py, 0) * var(--depth, 0) * 1px);
+	will-change: translate;
 }
 
-.star {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
+/* Non-origin pages: fade the scene away and pause its animations. */
+.scene-only { transition: opacity 900ms var(--ease-settle), visibility 0s linear 0s; }
+.bg--sky .scene-only {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 900ms var(--ease-settle), visibility 0s linear 900ms;
+}
+.bg--sky .scene-only * { animation-play-state: paused !important; }
+
+/* ── 3. SKY ───────────────────────────────────────────────────────────────── */
+.haze { position: absolute; display: block; border-radius: 50%; }
+
+.haze--rust {
+	width: 90vmax; height: 90vmax; left: -35vmax; bottom: -55vmax;
+	background: radial-gradient(closest-side, rgba(92, 51, 23, 0.2), transparent);
+	animation: haze-breathe 22s ease-in-out infinite alternate;
 }
 
-.smudge {
-    position: absolute;
-    top: 20%;
-    left: 80%;
-    translate: -50% -50%;
-    z-index: 1;
+.haze--amber {
+	width: 70vmax; height: 70vmax; right: -30vmax; top: -35vmax;
+	background: radial-gradient(closest-side, rgba(193, 122, 46, 0.1), transparent);
+	animation: haze-breathe 30s ease-in-out -8s infinite alternate;
 }
 
-.smudge::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    translate: -50% -50%;
-    content: "";
-    background-color: var(--amber-core);
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    box-shadow: 0 0 100px 10px var(--amber-core);
+.bg-star {
+	position: absolute;
+	display: block;
+	border-radius: 50%;
+	background: var(--signal-white);
+	opacity: var(--a, 0.3);
 }
 
-.smudge::after {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    translate: -50% -50%;
-    background: #000;
-    width: 7rem;
-    height: 7rem;
-    z-index: 1;
-    border-radius: 50%;
+.bg-star--warm { background: var(--ember); }
+
+.bg-star--twinkle { animation: twinkle var(--dur, 5s) ease-in-out var(--delay, 0s) infinite alternate; }
+
+/* A few bright stars with a four-point glint: two hairlines crossing. */
+.bg-star--glint {
+	width: 2px; height: 2px;
+	opacity: 0.85;
+	box-shadow: 0 0 7px 1px rgba(232, 228, 217, 0.5);
+	animation: glint var(--dur, 6s) ease-in-out var(--delay, 0s) infinite;
+}
+.bg-star--glint::before,
+.bg-star--glint::after {
+	content: '';
+	position: absolute;
+	left: 50%; top: 50%;
+	width: 18px; height: 1px;
+	translate: -50% -50%;
+	background: linear-gradient(90deg, transparent, rgba(232, 228, 217, 0.85), transparent);
+}
+.bg-star--glint::after { rotate: 90deg; }
+
+/* ── 4. SCENE PLACEMENT ───────────────────────────────────────────────────── */
+/* The black hole, chain and heart share ONE square box. Everything inside is
+   positioned in % of that box, so the composition stays intact at any size:
+   the heart can never drift away from its chain. */
+.scene {
+	position: absolute;
+	right: calc(3rem + 2vmin); /* 3rem cancels the layer's -3rem bleed */
+	top: 50%;
+	translate: 0 -50%;
+	width: min(80vmin, 46rem);
+	aspect-ratio: 1;
+	opacity: var(--scene-opacity);
+}
+
+/* ── 5. BLACK HOLE ────────────────────────────────────────────────────────── */
+.bh { position: absolute; left: 61%; top: 7%; width: 26%; aspect-ratio: 1; }
+.bh i, .bh div { position: absolute; display: block; }
+
+.bh__glow {
+	inset: -75%;
+	border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(193, 122, 46, 0.3), rgba(92, 51, 23, 0.16) 38%, transparent);
+	animation: haze-breathe 8s ease-in-out infinite alternate;
+}
+
+/* The whole disk system is tilted a little, so it isn't dead horizontal. */
+.bh__tilt { inset: 0; rotate: -14deg; }
+
+/* Squash a circle into a thin ellipse, then keep only the top or bottom half. */
+.bh__flat { inset: -30%; scale: 1 0.2; }
+.bh__flat--back { clip-path: inset(0 0 50% 0); }
+.bh__flat--front { clip-path: inset(50% 0 0 0); }
+
+/* The disk: a spinning conic (colour-wheel) gradient with a bright "hot" side,
+   cut into a ring by a mask. `closest-side` makes 100% = the circle's radius. */
+.bh__disk {
+	inset: 0;
+	border-radius: 50%;
+	background: conic-gradient(from 0deg, #5C3317, #C17A2E 10%, var(--ember) 20%, #C17A2E 30%, #5C3317 48%, #24130a 62%, var(--brass-lo) 76%, #C17A2E 88%, #5C3317);
+	-webkit-mask-image: radial-gradient(circle closest-side, transparent 36%, #000 40%, rgba(0, 0, 0, 0.7) 64%, transparent 98%);
+	mask-image: radial-gradient(circle closest-side, transparent 36%, #000 40%, rgba(0, 0, 0, 0.7) 64%, transparent 98%);
+	animation: spin 26s linear infinite;
+}
+
+.bh__core {
+	inset: 25%;
+	border-radius: 50%;
+	background: #000;
+	box-shadow: 0 0 0 1px rgba(240, 194, 124, 0.28), 0 0 26px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* Photon ring: a thin bright ring hugging the core. */
+.bh__halo {
+	inset: 20.5%;
+	border-radius: 50%;
+	background: conic-gradient(from 20deg, rgba(193, 122, 46, 0.4), rgba(240, 194, 124, 0.95) 16%, rgba(193, 122, 46, 0.3) 38%, rgba(193, 122, 46, 0.22) 68%, rgba(240, 194, 124, 0.7) 86%, rgba(193, 122, 46, 0.4));
+	-webkit-mask-image: radial-gradient(circle closest-side, transparent 90%, #000 93%, #000 95.5%, transparent 99%);
+	mask-image: radial-gradient(circle closest-side, transparent 90%, #000 93%, #000 95.5%, transparent 99%);
+	filter: blur(0.4px) drop-shadow(0 0 4px rgba(193, 122, 46, 0.6));
+	animation: spin 40s linear infinite reverse;
+}
+
+/* Lensed arch: a bigger ring, visible only over the top and under the bottom
+   (two masks combined with `intersect`). Where a browser can't combine masks
+   the whole ring shows instead, which still looks fine. */
+.bh__arch {
+	inset: 11%;
+	border-radius: 50%;
+	background: conic-gradient(from 0deg, rgba(240, 194, 124, 0.1), rgba(227, 176, 106, 0.42) 25%, rgba(193, 122, 46, 0.16) 50%, rgba(227, 176, 106, 0.42) 75%, rgba(240, 194, 124, 0.1));
+	-webkit-mask-image: radial-gradient(circle closest-side, transparent 90%, #000 93%, #000 97%, transparent 100%), linear-gradient(180deg, #000 0, #000 30%, transparent 42%, transparent 58%, #000 70%, #000 100%);
+	mask-image: radial-gradient(circle closest-side, transparent 90%, #000 93%, #000 97%, transparent 100%), linear-gradient(180deg, #000 0, #000 30%, transparent 42%, transparent 58%, #000 70%, #000 100%);
+	-webkit-mask-composite: source-in;
+	mask-composite: intersect;
+	animation: spin 60s linear infinite;
+}
+
+/* ── 6. CHAIN + LOOSE LINKS ───────────────────────────────────────────────── */
+.chain { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.chain__sway {
+	/* Pivot at the heart's anchor ring: the far end swings most, like a real chain. */
+	transform-box: view-box;
+	transform-origin: 54px 71.7px;
+	animation: chain-sway 14s ease-in-out infinite alternate;
+}
+
+.chain__links,
+.chain__shine,
+.chain__holes { fill: none; stroke-linecap: round; }
+
+.chain__links { stroke: var(--brass-lo); stroke-width: 1.5; stroke-dasharray: 2.4 1.1; }
+.chain__shine { stroke: var(--brass-hi); stroke-width: 0.45; stroke-dasharray: 2.4 1.1; stroke-opacity: 0.8; translate: -0.25px -0.25px; }
+.chain__holes { stroke: #0b0705; stroke-width: 0.55; stroke-dasharray: 1 2.5; stroke-dashoffset: -0.7; }
+
+/* A link torn off the chain: drifts toward the hole, tumbling, fading out. */
+.loose {
+	position: absolute;
+	display: block;
+	width: 1.7%;
+	aspect-ratio: 0.62;
+	border-radius: 50%;
+	border: 1.5px solid var(--brass-lo);
+	box-shadow: inset 0 0 0 1px rgba(227, 176, 106, 0.28);
+	opacity: 0;
+	animation: loose-drift var(--dur, 18s) ease-in var(--delay, 0s) infinite;
+}
+
+/* ── 7. MECHANICAL HEART ──────────────────────────────────────────────────── */
+.heart { position: absolute; left: 32.5%; top: 54.5%; width: 27%; aspect-ratio: 1; }
+
+.heart__glow {
+	position: absolute;
+	display: block;
+	inset: -90%;
+	border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(193, 122, 46, 0.3), rgba(193, 122, 46, 0.1) 45%, transparent);
+	animation: heartbeat 1s ease-in-out infinite; /* 1 beat per second = 60 bpm */
+}
+
+.heart__svg { position: relative; display: block; width: 100%; height: 100%; overflow: visible; }
+
+.heart__halo {
+	transform-box: view-box;
+	transform-origin: 60px 62px;
+	animation: heartbeat 1s ease-in-out infinite;
+}
+
+.heart__pipe { fill: none; stroke: #4a2c14; stroke-width: 6; stroke-linecap: round; }
+.heart__pipe--thin { stroke-width: 4; }
+.heart__pipe-shine { fill: none; stroke: #9a6a35; stroke-width: 1.4; stroke-linecap: round; translate: -1.2px -0.6px; opacity: 0.6; }
+.heart__coupling { fill: #2b190b; stroke: var(--brass-hi); stroke-width: 1; }
+
+.heart__band { fill: none; stroke: #0e0805; stroke-width: 2.4; opacity: 0.65; }
+.heart__band-shine { fill: none; stroke: #b98341; stroke-width: 0.7; opacity: 0.55; }
+.heart__rivet { fill: var(--brass-hi); opacity: 0.8; }
+
+.heart__bezel-glow { fill: none; stroke: var(--ember); stroke-width: 3; animation: lens-pulse 1s ease-in-out infinite; }
+.heart__bezel { fill: none; stroke: var(--brass-hi); stroke-width: 1.8; }
+.heart__glint { fill: none; stroke: rgba(255, 240, 210, 0.38); stroke-width: 1.2; stroke-linecap: round; }
+
+.heart__dial { fill: #0d0805; stroke: var(--brass-hi); stroke-width: 1.2; }
+.heart__needle {
+	stroke: var(--ember);
+	stroke-width: 0.9;
+	stroke-linecap: round;
+	transform-box: view-box;
+	transform-origin: 60px 31px;
+	animation: spin 20s linear infinite;
+}
+.heart__eye { fill: none; stroke: var(--brass-hi); stroke-width: 1.7; }
+
+/* Gears inside the lens. transform-origin is set inline, per gear. */
+.hg { transform-box: view-box; animation: spin var(--dur, 26s) linear infinite; }
+.hg--rev { animation-direction: reverse; }
+.hg__teeth { fill: none; stroke: #c17a2e; }
+.hg__body { fill: none; stroke: #c17a2e; stroke-width: 0.9; }
+.hg__hub { fill: #e3b06a; }
+.hg__spoke { stroke: #c17a2e; stroke-width: 0.8; }
+
+/* ── 8. DEBRIS · DUST · NEAR COG · VIGNETTE ───────────────────────────────── */
+.cog { position: absolute; fill: none; stroke: var(--brass-lo); animation: spin 150s linear infinite; }
+.cog__teeth { stroke-width: 8; }
+.cog__ring { stroke-width: 2; }
+.cog__spoke { stroke-width: 2; }
+.cog--a { right: 9%; bottom: 7%; width: 7.5rem; opacity: 0.16; }
+.cog--b { left: 7%; top: 12%; width: 4rem; opacity: 0.11; animation-direction: reverse; animation-duration: 90s; }
+
+.pipe { position: absolute; left: 42%; top: 13%; width: 9rem; opacity: 0.16; animation: tumble 110s linear infinite; }
+.pipe__flange { fill: #2b190b; stroke: var(--brass-hi); stroke-width: 0.8; }
+.pipe__rivet { fill: var(--brass-hi); }
+
+.mote {
+	position: absolute;
+	display: block;
+	border-radius: 50%;
+	background: var(--ember);
+	box-shadow: 0 0 6px rgba(240, 194, 124, 0.6);
+	opacity: var(--o, 0.4);
+	animation: mote-drift var(--dur, 20s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+
+/* The big foreground silhouette, pushed off the bottom-left corner. */
+.near-cog {
+	position: absolute;
+	left: -9rem;
+	bottom: -11rem;
+	width: 28rem;
+	filter: blur(3px);
+	opacity: 0.9;
+}
+.near-cog__spin { transform-box: view-box; transform-origin: 50px 50px; animation: spin 260s linear infinite; }
+
+.bg-vignette {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at center, transparent 45%, rgba(8, 8, 8, 0.55) 78%, rgba(8, 8, 8, 0.95) 100%);
+}
+
+/* ── 9. KEYFRAMES ─────────────────────────────────────────────────────────── */
+@keyframes spin { to { rotate: 360deg; } }
+
+@keyframes haze-breathe {
+	from { opacity: 0.65; scale: 1; }
+	to   { opacity: 1; scale: 1.06; }
+}
+
+@keyframes twinkle { from { opacity: var(--a); } to { opacity: var(--b); } }
+
+@keyframes glint {
+	0%, 100% { opacity: 0.25; scale: 0.7; }
+	50%      { opacity: 0.95; scale: 1.1; }
+}
+
+/* "lub-dub": a big beat, a rest, a smaller beat, a long rest. Repeats every
+   second. */
+@keyframes heartbeat {
+	0%, 100% { scale: 1; opacity: 0.7; }
+	8%       { scale: 1.07; opacity: 1; }
+	16%      { scale: 1; opacity: 0.8; }
+	28%      { scale: 1.045; opacity: 0.95; }
+	42%      { scale: 1; opacity: 0.7; }
+}
+
+@keyframes lens-pulse {
+	0%, 100% { opacity: 0.35; }
+	8%       { opacity: 0.95; }
+	16%      { opacity: 0.45; }
+	28%      { opacity: 0.8; }
+	42%      { opacity: 0.35; }
+}
+
+@keyframes chain-sway {
+	from { rotate: -1.2deg; }
+	to   { rotate: 1.4deg; }
+}
+
+@keyframes loose-drift {
+	0%   { opacity: 0; translate: 0 0; rotate: 0deg; }
+	14%  { opacity: 0.85; }
+	100% { opacity: 0; translate: var(--dx) var(--dy); rotate: var(--rot); }
+}
+
+@keyframes mote-drift {
+	from { translate: 0 0; opacity: calc(var(--o) * 0.3); }
+	to   { translate: var(--dx) var(--dy); opacity: var(--o); }
+}
+
+@keyframes tumble {
+	from { rotate: -24deg; }
+	to   { rotate: 336deg; }
+}
+
+/* ── 10. MOBILE ───────────────────────────────────────────────────────────── */
+/* The scene moves to the top-right and dims, so it can't fight the text. */
+@media (max-width: 700px) {
+	.section-bg { --scene-opacity: 0.5; }
+	.scene { right: calc(3rem + 1.6vw); top: 5rem; translate: none; width: 90vw; }
+	.cog--a { width: 5rem; }
+	.pipe { display: none; }
+	.near-cog { width: 18rem; left: -6rem; bottom: -7rem; }
+}
+
+/* ── 11. REDUCED MOTION ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+	.section-bg *,
+	.section-bg *::before,
+	.section-bg *::after { animation: none !important; }
+	.loose { opacity: 0.5; }
 }

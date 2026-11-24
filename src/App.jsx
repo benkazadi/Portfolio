@@ -7,7 +7,7 @@ import About    from './Pages/About';
 import Skills   from './Pages/Skills';
 import Projects from './Pages/Projects';
 import Contact  from './Pages/Contact';
-import Background from './components/background/Background';
+import Background from './components/Background';
 
 const SECTIONS = [
 	{ id: 'origin',   label: 'ORIGIN',   subtitle: 'SIGNAL DETECTED',   Component: Origin   },
