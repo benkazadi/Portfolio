@@ -1,102 +1,24 @@
-import '../styles/Projects.css'
+import '../styles/panel.css';
+import '../styles/Projects.css';
 import NextSection from '../components/NextSection';
+import ProjectCard from '../components/ProjectCard';
+import { PROJECTS } from './projectsData.js';
 
-function Project({ id, stack , title, CStatus, description, tags, repo, live }) {
-    return(
-        <div className='project'>
-            <header>
-                <div>
-                    <div className='id'>{id} // {stack}</div>
-                    <h1>{title}</h1>
-                </div>
-                <div className='status'>{CStatus}</div>
-            </header>
-            <main>
-                <p>{description}</p>
-            </main>
-            <section>
-                {tags.map((tag) => (
-                    <div key={tag}>{tag}</div>
-                ))}
-            </section>
-            <footer>
-                <div>
-                    {repo && repo !== 'https://...' && (
-                        <div className='github'>
-                            <a href={repo} target="_blank" rel="noreferrer">GitHub</a>
-                        </div>
-                    )}
-                    {live && (
-                        <div className='live'>
-                            <a href={live} target="_blank" rel="noreferrer">Live</a>
-                        </div>
-                    )}
-                </div>
-                <div className='dot'></div>
-            </footer>
-        </div>
-    )
-}
-export default function Projects( { onNext } ) {
-    const projects = [
-        {
-            id: 'EXPEDITION_001',
-            stack: '',
-            title: 'Vertex Forge',
-            status: '● In progress',
-            description: `
-                An indie game development team still in progress.
-                It will be focused on bringing creative and unique
-                stories to life by creating immersive experiences through
-                games.`,
-            tags: ['Game Development', 'C++', 'C#'],
-            repo: 'https://...',
-            live: 'https://vertex-forge-studio.vercel.app'
-        },
-        {
-            id: 'EXPEDITION_002',
-            stack: 'NODE.JS',
-            title: 'ACE',
-            status: '● active',
-            description: `
-                A WhatsApp bot built on Baileys with a cocky, 
-                sarcastic personality. Handles commands, 
-                and conversations, and and small usefull tasks 
-                such as downloading media fromthe internet.`,
-            tags: ['Node.js', 'Baileys', 'ESM', 'WebSocket'],
-            repo: 'https://...',
-            live: null
-        },
-        {
-            id: 'EXPEDITION_003',
-            stack: 'HTML+CSS+JS',
-            title: 'Periodic Table',
-            status: 'active',
-            description: '...',
-            tags: ['React.js'],
-            repo: 'https://github.com/benkazadi/Portfolio',
-            live: 'https://benkazadi.vercel.app'
-        },
-        {
-            id: 'EXPEDITION_004',
-            stack: 'NODE.JS',
-            title: 'NotePad',
-            status: 'active',
-            description: '...',
-            tags: ['React.js', 'Node.js', 'Express.js', 'MySQL'],
-            repo: 'https://...',
-            live: null
-        },
-    ];
-    return (
-        <div className='project-body'>
-            <h1>PROJECTS</h1>
-            <div className='projects-grid'>
-                {projects.map((n) => (
-                    <Project key={n.id} id={n.id} stack={n.stack} title={n.title} CStatus={n.status} description={n.description} tags={n.tags} repo={n.repo} live={n.live} />
-                ))}
-            </div>
-            <NextSection label="CONTACT" subtitle="CONTACT ME" onClick={onNext} />
-        </div>
-    );
+export default function Projects({ onNext }) {
+	return (
+		<div className="pj-page">
+			<header className="pj-header">
+				<p className="pj-eyebrow">&gt; FIELD EXPEDITIONS: {PROJECTS.length} RECORDS</p>
+				<h1 className="pj-heading">Projects</h1>
+			</header>
+
+			<div className="pj-grid">
+				{PROJECTS.map((project, i) => (
+					<ProjectCard key={project.title} project={project} index={i} />
+				))}
+			</div>
+
+			{onNext && <NextSection label="CONTACT" subtitle="CONTACT ME" onClick={onNext} />}
+		</div>
+	);
 }

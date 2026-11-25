@@ -348,7 +348,9 @@ export default function Navigation3D({ onEnterSection, onClose }) {
 
 			{onClose && (
 				<button className="map-close-button hud-button" onClick={onClose} aria-label="Close map">
-					<span aria-hidden="true">↙</span> RETURN TO SECTION
+					<span aria-hidden="true">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C17A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-arrow-down-left-exit preview-icon"><path d="M13 21h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6"/><path d="m3 21 9-9"/><path d="M9 21H3v-6"/></svg>
+					</span> RETURN TO SECTION
 				</button>
 			)}
 		</div>

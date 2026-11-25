@@ -75,6 +75,8 @@
 	z-index: 6;
 	bottom: 1.75rem;
 	left:   1.75rem;
+  display: flex;
+  align-items: center;
 }
 
 .spatial-nav {
